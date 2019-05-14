@@ -1,0 +1,4 @@
+#!/bin/sh
+# put this file in /usr/local/bin/git-debranch
+git fetch -p
+git branch -D `git branch -vv |grep gone |cut -d ' ' -f 3`
