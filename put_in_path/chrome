@@ -1,2 +1,2 @@
 #!/bin/sh
-open -a "Google Chrome" 
+open -a "Google Chrome" "$@" 

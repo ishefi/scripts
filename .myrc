@@ -1,0 +1,6 @@
+eval `keychain --quiet --eval --agents ssh --inherit any tau-compling-virginia.pem`
+eval `keychain --quiet --eval --agents ssh --inherit any id_rsa`
+alias ll='ls -G -l "$@"'
+alias code='cd ~/al/web-server'
+alias chrome='open -a "Google Chrome" "$@"'
+alias please='sudo $(fc -ln -1)'
