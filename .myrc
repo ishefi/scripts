@@ -1,6 +1,7 @@
-eval `keychain --quiet --eval --agents ssh --inherit any tau-compling-virginia.pem`
 eval `keychain --quiet --eval --agents ssh --inherit any id_rsa`
-alias ll='ls -G -l "$@"'
-alias code='cd ~/al/web-server'
+export LSCOLORS=ExGxcxDxCxegedabagaced
+alias ls='ls -G'
+alias ll='ls -alF'
 alias chrome='open -a "Google Chrome" "$@"'
 alias please='sudo $(fc -ln -1)'
+source ~/.workrc
