@@ -1,4 +1,9 @@
 #!/bin/sh
-# put this file in /usr/local/bin/
+# put this file in /usr/local/bin/git-debranch
 git fetch -p
-git branch -D `git branch -vv |grep gone |cut -d ' ' -f 3`
+BRANCHES=`git branch -vv |grep gone |cut -d ' ' -f 3`
+if [ "$BRANCHES" != "" ]
+	then git branch -D $BRANCHES
+else
+	echo "no branches to delete"
+fi
