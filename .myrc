@@ -1,3 +1,6 @@
+# run `ln -s /path/to/this/file ~/.myrc`
+# then add the following line to `~/.basrc` or `~/.bash_profile` or whatever:
+# `source ~/.myrc`
 eval `keychain --quiet --eval --agents ssh --inherit any id_rsa`
 export LSCOLORS=ExGxcxDxCxegedabagaced
 alias ls='ls -G'
