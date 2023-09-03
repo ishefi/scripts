@@ -1,6 +1,13 @@
-# run `ln -s /path/to/this/file ~/.myrc`
+# run:
+# ```
+# ln -s `realpath .myrc` ~/.myrc
+# ```
 # then add the following line to `~/.basrc` or `~/.bash_profile` or whatever:
 # `source ~/.myrc`
+# you can do it by running the following command:
+# ```
+# echo "source ~/.myrc" >> ~/.zshrc
+# ```
 eval `keychain --quiet --eval --agents ssh --inherit any id_rsa`
 export LSCOLORS=ExGxcxDxCxegedabagaced
 alias ls='ls -G'
@@ -12,4 +19,14 @@ alias reloadrc='source ~/.myrc'
 export EDITOR=vim
 set -o vi
 bindkey "^R" history-incremental-search-backward
-source ~/.workrc
+if [ -f ~/.workrc ]
+then
+  source ~/.workrc
+fi
+
+if command -v zellij &> /dev/null
+then
+  export ZELLIJ_AUTO_ATTACH=true
+  export ZELLIJ_AUTO_EXIT=true
+  eval "$(zellij setup --generate-auto-start zsh)"
+fi
