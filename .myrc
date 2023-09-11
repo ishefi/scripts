@@ -16,6 +16,7 @@ alias chrome='open -a "Google Chrome" "$@"'
 alias please='sudo $(fc -ln -1)'
 alias del-pyc='find . -name "*.pyc" -exec rm -f {} \;'
 alias reloadrc='source ~/.myrc'
+alias venvstart='source venv/bin/activate'
 export EDITOR=vim
 set -o vi
 bindkey "^R" history-incremental-search-backward
