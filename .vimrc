@@ -11,12 +11,12 @@ set number  " line numbers
 filetype plugin indent on    " required
 syntax on
 set splitright
-set clipboard=unnamedplus " Enables the clipboard between Vim/Neovim and other applications.
+set clipboard=unnamed " Enables the clipboard between Vim/Neovim and other applications.
 set mouse=a " Enable mouse support
 set autoindent
 set smartindent
 set title " Show file title
-set cc=80 " Show at 80 column a border for good code style
+set cc=88 " Show at 80 column a border for good code style
 set ttyfast " Speed up scrolling in Vim
 
 
