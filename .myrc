@@ -31,3 +31,16 @@ then
   export ZELLIJ_AUTO_EXIT=true
   eval "$(zellij setup --generate-auto-start zsh)"
 fi
+
+function wttr {
+	cols=$(tput cols);
+	if [ $cols -ge 125 ]; then
+		format=1;
+	elif [ $cols -ge 64 ]; then
+		format="n&1";
+	else
+		format=0;
+	fi
+	curl "wttr.in?F&q&$format";
+}
+wttr &
