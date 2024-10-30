@@ -5,6 +5,7 @@
 " ```
 
 set nocompatible              " required
+set backspace=indent,eol,start
 filetype off                  " required
 set rnu  " relative line numbers
 set number  " line numbers
@@ -16,7 +17,7 @@ set mouse=a " Enable mouse support
 set autoindent
 set smartindent
 set title " Show file title
-set cc=88 " Show at 80 column a border for good code style
+set cc=89 " Show at 89 column a border for good code style
 set ttyfast " Speed up scrolling in Vim
 
 
