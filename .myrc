@@ -27,8 +27,10 @@ fi
 
 if command -v zellij &> /dev/null
 then
-  export ZELLIJ_AUTO_ATTACH=true
-  eval "$(zellij setup --generate-auto-start zsh)"
+  if [[ ! "$ZELLIJ" ]]
+  then
+#     zellij -l welcome
+  fi
 fi
 
 function wttr {
@@ -43,3 +45,5 @@ function wttr {
 	curl "wttr.in?F&q&$format";
 }
 wttr &
+
+fortune -s | cowsay
