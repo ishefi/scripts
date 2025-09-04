@@ -8,7 +8,7 @@
 # ```
 # echo "source ~/.myrc" >> ~/.zshrc
 # ```
-eval `keychain --quiet --eval --agents ssh --inherit any id_rsa`
+eval `keychain --quiet --eval id_rsa`
 export LSCOLORS=ExGxcxDxCxegedabagaced
 alias ls='ls -G'
 alias ll='ls -alF'
