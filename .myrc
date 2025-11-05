@@ -8,7 +8,7 @@
 # ```
 # echo "source ~/.myrc" >> ~/.zshrc
 # ```
-eval `keychain --quiet --eval id_rsa`
+# eval `keychain --quiet --eval id_rsa`
 export LSCOLORS=ExGxcxDxCxegedabagaced
 alias ls='ls -G'
 alias ll='ls -alF'
@@ -20,6 +20,7 @@ alias venvstart='source venv/bin/activate'
 export EDITOR=vim
 set -o vi
 bindkey "^R" history-incremental-search-backward
+autoload -Uz compinit && compinit
 if [ -f ~/.workrc ]
 then
   source ~/.workrc

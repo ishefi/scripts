@@ -29,30 +29,37 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  -- nvim-lspconfig: Configurations for Neovim's built-in LSP client
+  -- Mason for installing LSP servers
   {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
-      "hrsh7th/cmp-nvim-lsp", -- For nvim-cmp to get LSP capabilities
-    },
+    "williamboman/mason.nvim",
     config = function()
+      require("mason").setup()
+    end,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "jedi_language_server" },
+      })
+    end,
+  },
+
+  -- LSP configuration using new vim.lsp.config API
+  {
+    "hrsh7th/cmp-nvim-lsp", -- For nvim-cmp to get LSP capabilities
+    config = function()
+      -- Get capabilities for autocompletion
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-      require("lspconfig").jedi_language_server.setup({
+      -- Define LSP configuration for jedi_language_server
+      vim.lsp.config('jedi_language_server', {
+        cmd = { 'jedi-language-server' },
+        filetypes = { 'python' },
+        root_markers = { 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt', '.git' },
         capabilities = capabilities,
-        on_attach = function(client, bufnr)
-          -- Keymaps for LSP actions (customize as you like)
-          local bufopts = { noremap=true, silent=true, buffer=bufnr }
-          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-          vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-          vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-          vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-          vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
-          vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
-        end,
         settings = {
           jedi = {
             -- Your jedi-language-server settings here
@@ -60,9 +67,27 @@ require("lazy").setup({
         }
       })
 
-      require("mason").setup()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "jedi_language_server" },
+      -- Set up keymaps when LSP attaches
+      vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(args)
+          local bufnr = args.buf
+          local bufopts = { noremap=true, silent=true, buffer=bufnr }
+          
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+          vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+          vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+          vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
+          vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
+        end,
+      })
+
+      -- Enable LSP for Python files
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'python',
+        callback = function()
+          vim.lsp.enable('jedi_language_server')
+        end,
       })
     end,
   },
