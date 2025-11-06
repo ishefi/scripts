@@ -17,7 +17,7 @@ alias please='sudo $(fc -ln -1)'
 alias del-pyc='find . -name "*.pyc" -exec rm -f {} \;'
 alias reloadrc='source ~/.myrc'
 alias venvstart='source venv/bin/activate'
-export EDITOR=vim
+export EDITOR=nvim
 set -o vi
 bindkey "^R" history-incremental-search-backward
 autoload -Uz compinit && compinit
@@ -45,6 +45,6 @@ function wttr {
 	fi
 	curl "wttr.in?F&q&$format";
 }
-wttr &
 
-fortune -s | cowsay
+{ wttr ; fortune -s | cowsay }
+
