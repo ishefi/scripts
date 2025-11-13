@@ -43,7 +43,7 @@ function wttr {
 	else
 		format=0;
 	fi
-	curl "wttr.in?F&q&$format";
+	curl "wttr.in?F&q&$format" --max-time 2;
 }
 
 { wttr ; fortune -s | cowsay }
