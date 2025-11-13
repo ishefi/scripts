@@ -29,6 +29,18 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  -- Kanagawa colorscheme
+  {
+    "rebelot/kanagawa.nvim",
+    priority = 1000, -- Load colorscheme before other plugins
+    config = function()
+      require("kanagawa").setup({
+        background = { dark = "dragon", light = "wave" },  -- Force wave for both
+      })
+      vim.cmd("colorscheme kanagawa")
+    end,
+  },
+
   -- Mason for installing LSP servers
   {
     "williamboman/mason.nvim",
@@ -139,3 +151,4 @@ require("lazy").setup({
     end,
   },
 })
+
