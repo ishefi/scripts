@@ -18,7 +18,6 @@ alias del-pyc='find . -name "*.pyc" -exec rm -f {} \;'
 alias reloadrc='source ~/.myrc'
 alias venvstart='source venv/bin/activate'
 export EDITOR=nvim
-set -o vi
 bindkey "^R" history-incremental-search-backward
 autoload -Uz compinit && compinit
 if [ -f ~/.workrc ]
@@ -35,6 +34,7 @@ then
 fi
 
 function wttr {
+    local max_time=${1:-0}
 	cols=$(tput cols);
 	if [ $cols -ge 125 ]; then
 		format=1;
@@ -43,8 +43,25 @@ function wttr {
 	else
 		format=0;
 	fi
-	curl "wttr.in?F&q&$format" --max-time 2;
+	curl "wttr.in?F&q&$format" --max-time "$max_time";
 }
 
-{ wttr ; fortune -s | cowsay }
+{ wttr 1; fortune -s | cowsay }
 
+# Switch to vi mode
+set -o vi
+bindkey -v
+
+# Use beam cursor in insert mode, block in normal mode
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+  elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ $1
+ = 'beam' ]]; then
+    echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+
+# Ensure beam cursor when starting a new prompt
+echo -ne '\e[5 q'
