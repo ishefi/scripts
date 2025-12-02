@@ -10,6 +10,14 @@ cd scripts
 ./setup.sh
 ```
 
+## Updating
+
+To pull the latest changes and update packages:
+
+```bash
+./update.sh
+```
+
 ## What Setup Does
 
 1. **Prompts for git configuration** (name, personal email, work email)
