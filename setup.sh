@@ -7,6 +7,13 @@ echo "=== Setting up your new machine ==="
 echo "Script directory: $SCRIPT_DIR"
 echo ""
 
+# --- Prompt for user info ---
+echo "Please enter your details for git configuration:"
+read -p "  Full name: " GIT_NAME
+read -p "  Personal email: " PERSONAL_EMAIL
+read -p "  Work email: " WORK_EMAIL
+echo ""
+
 # --- Install Homebrew if not present ---
 if ! command -v brew &> /dev/null; then
     echo "Installing Homebrew..."
@@ -49,16 +56,24 @@ ln -sfv "$SCRIPT_DIR/.myrc" "$HOME/.myrc"
 # .vimrc
 ln -sfv "$SCRIPT_DIR/.vimrc" "$HOME/.vimrc"
 
-# .gitconfig
-ln -sfv "$SCRIPT_DIR/.gitconfig" "$HOME/.gitconfig"
-
-# .gitconfig-private (if exists)
-if [[ -f "$SCRIPT_DIR/.gitconfig-private" ]]; then
-    ln -sfv "$SCRIPT_DIR/.gitconfig-private" "$HOME/.gitconfig-private"
-fi
-
 # .gitignore-global
 ln -sfv "$SCRIPT_DIR/.gitignore-global" "$HOME/.gitignore-global"
+
+# --- Generate git config files from templates ---
+echo ""
+echo "Generating git config files..."
+
+# .gitconfig
+sed -e "s/{{NAME}}/$GIT_NAME/g" "$SCRIPT_DIR/.gitconfig.template" > "$HOME/.gitconfig"
+echo "  Generated ~/.gitconfig"
+
+# .gitconfig-private
+sed -e "s/{{PERSONAL_EMAIL}}/$PERSONAL_EMAIL/g" "$SCRIPT_DIR/.gitconfig-private.template" > "$HOME/.gitconfig-private"
+echo "  Generated ~/.gitconfig-private"
+
+# .gitconfig-work
+sed -e "s/{{WORK_EMAIL}}/$WORK_EMAIL/g" "$SCRIPT_DIR/.gitconfig-work.template" > "$HOME/.gitconfig-work"
+echo "  Generated ~/.gitconfig-work"
 
 # neovim init.lua
 mkdir -p "$HOME/.config/nvim"

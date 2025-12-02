@@ -1,0 +1,16 @@
+[alias]
+	co = checkout
+[user]
+	name = {{NAME}}
+[includeIf "gitdir:~/work/"]
+	path = ~/.gitconfig-work
+[includeIf "gitdir:~/private/projects/"]
+	path = ~/.gitconfig-private
+[core]
+	excludesfile = ~/.gitignore-global
+	pager = "less -F -X"
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

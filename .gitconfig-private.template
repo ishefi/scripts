@@ -1,0 +1,4 @@
+[user]
+	email = {{PERSONAL_EMAIL}}
+[core]
+	sshCommand = ssh -i ~/.ssh/id_rsa_private -F /dev/null
