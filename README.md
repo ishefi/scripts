@@ -10,14 +10,41 @@ cd scripts
 ./setup.sh
 ```
 
-The setup script will:
-1. Prompt for your name and email addresses (personal & work)
-2. Install Homebrew (if not present)
-3. Install packages: `fortune`, `cowsay`, `neovim`, `zellij`
-4. Symlink config files to your home directory
-5. Generate git configs from templates
-6. Install Oh My Zsh
-7. Add `source ~/.myrc` to your `.zshrc`
+## What Setup Does
+
+1. **Prompts for git configuration** (name, personal email, work email)
+   - Detects existing values and offers them as defaults
+2. **Installs Homebrew** (if not present)
+3. **Installs packages** from `Brewfile` via `brew bundle`
+4. **Symlinks config files** (asks before overwriting existing files)
+5. **Generates git configs** from templates with your info
+6. **Sets up SSH keys** for personal and work GitHub accounts
+   - Offers to copy public keys to clipboard
+7. **Installs Oh My Zsh**
+8. **Configures macOS defaults** (optional):
+   - Fast key repeat, disable press-and-hold
+   - Tap to click
+   - Finder: show hidden files, extensions, path bar
+   - Dock: auto-hide, no recent apps
+   - Screenshots save to Downloads
+9. **Adds `source ~/.myrc`** to `.zshrc`
+
+## Brewfile
+
+Edit `Brewfile` to customize packages:
+
+```ruby
+# CLI tools
+brew "fortune"
+brew "cowsay"
+brew "neovim"
+brew "zellij"
+
+# GUI apps
+cask "rectangle"
+cask "caffeine"
+cask "ghostty"
+```
 
 ## What's Included
 
