@@ -32,5 +32,17 @@ else
     echo "  Oh My Zsh not installed, skipping"
 fi
 
+# --- Symlink any new zellij layouts ---
+echo ""
+echo "Updating zellij layouts..."
+mkdir -p "$HOME/.config/zellij/layouts"
+for layout in "$SCRIPT_DIR/zellij/layouts/"*.kdl; do
+    if [[ -f "$layout" ]]; then
+        name="$(basename "$layout")"
+        ln -sf "$layout" "$HOME/.config/zellij/layouts/$name"
+        echo "  Linked $name"
+    fi
+done
+
 echo ""
 echo "=== Update complete! ==="

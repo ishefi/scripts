@@ -119,6 +119,17 @@ if ! file_exists_and_skip "$HOME/.config/nvim/init.lua" "~/.config/nvim/init.lua
     ln -sfv "$SCRIPT_DIR/init.lua" "$HOME/.config/nvim/init.lua"
 fi
 
+# zellij layouts
+mkdir -p "$HOME/.config/zellij/layouts"
+for layout in "$SCRIPT_DIR/zellij/layouts/"*.kdl; do
+    if [[ -f "$layout" ]]; then
+        name="$(basename "$layout")"
+        if ! file_exists_and_skip "$HOME/.config/zellij/layouts/$name" "~/.config/zellij/layouts/$name"; then
+            ln -sfv "$layout" "$HOME/.config/zellij/layouts/$name"
+        fi
+    fi
+done
+
 # --- Generate git config files from templates ---
 echo ""
 echo "Generating git config files..."
