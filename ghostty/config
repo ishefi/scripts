@@ -1,0 +1,5 @@
+# Use Option key as Alt (for macOS)
+macos-option-as-alt = true
+
+# Prevent Shift+Enter from submitting (send escape sequence instead)
+keybind = shift+enter=text:\x1b\r

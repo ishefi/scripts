@@ -65,6 +65,7 @@ cask "ghostty"
 | `.gitconfig.template` | Git config with conditional includes for work/private |
 | `.gitignore-global` | Global gitignore |
 | `zellij/layouts/` | Zellij layouts |
+| `ghostty/config` | Ghostty terminal config (Option as Alt, Shift+Enter fix) |
 
 ### Scripts
 | Script | Description |

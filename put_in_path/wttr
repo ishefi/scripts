@@ -1,0 +1,17 @@
+#!/bin/sh
+# Weather in terminal using wttr.in
+# Usage: wttr [max_time]
+#   max_time: curl timeout in seconds (default: 0 = no timeout)
+
+max_time=${1:-0}
+cols=$(tput cols)
+
+if [ "$cols" -ge 125 ]; then
+    format=1
+elif [ "$cols" -ge 64 ]; then
+    format="n&1"
+else
+    format=0
+fi
+
+curl "wttr.in?F&q&$format" --max-time "$max_time"
