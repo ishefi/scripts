@@ -138,6 +138,30 @@ require("lazy").setup({
     end,
   },
 
+  -- nvim-tree: File explorer
+  {
+    "nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("nvim-tree").setup({
+        view = {
+          width = 30,
+        },
+        filters = {
+          dotfiles = false,
+        },
+        git = {
+          enable = true,
+          ignore = false,
+        },
+      })
+      -- Keymaps
+      vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true, desc = "Toggle file explorer" })
+      vim.keymap.set('n', '<leader>o', ':NvimTreeFocus<CR>', { noremap = true, silent = true, desc = "Focus file explorer" })
+      vim.keymap.set('n', '<leader>f', ':NvimTreeFindFile<CR>', { noremap = true, silent = true, desc = "Find current file in explorer" })
+    end,
+  },
+
   -- nvim-treesitter for syntax highlighting and more
   {
     "nvim-treesitter/nvim-treesitter",
