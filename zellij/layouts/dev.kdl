@@ -2,6 +2,10 @@
 // Usage: zellij --layout dev
 
 layout {
+    // zellaude
+    pane size=1 borderless=true {
+        plugin location="https://github.com/ishefi/zellaude/releases/latest/download/zellaude.wasm"
+    }
     // main area + terminal below
     pane split_direction="horizontal" {
         // Main pane
@@ -39,6 +43,6 @@ layout {
         }
     }
     pane size=1 borderless=true {
-        plugin location="https://github.com/ishefi/zellaude/releases/latest/download/zellaude.wasm"
+        plugin location="zellij:status-bar"
     }
 }
